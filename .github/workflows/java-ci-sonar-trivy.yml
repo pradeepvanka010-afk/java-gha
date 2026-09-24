@@ -25,4 +25,12 @@ jobs:
         run: |
           java -version
           mvn -version
+        # 4. Build + SonarQube Analysis
+      - name: Build and SonarQube Analysis
+        run: |
+          mvn -B clean verify \
+            org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+            -Dsonar.projectKey=Boardgame \
+            -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \
+            -Dsonar.token=${{ secrets.SONAR_TOKEN }}        
           
